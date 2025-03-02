@@ -1,4 +1,4 @@
-package wavsgo
+package handler
 
 // incoming-handler interface from the wasi/http wit package
 
@@ -32,12 +32,12 @@ func Some[T any](val cm.Option[T]) *T {
 	return (&val).Some()
 }
 
-func theHandler(req types.IncomingRequest, res types.ResponseOutparam) {
+func WasiHandler(req types.IncomingRequest, res types.ResponseOutparam) {
 	h.Handle(req, res)
 }
 
 func init() {
-	incominghandler.Exports.Handle = theHandler
+	incominghandler.Exports.Handle = WasiHandler
 }
 
 func HandleFunc(pattern string, fn http.HandlerFunc) {
